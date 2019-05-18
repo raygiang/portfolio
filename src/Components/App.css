@@ -1,0 +1,173 @@
+html {
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Fredoka One', cursive;
+}
+
+.page-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.background-bubble {
+  position: fixed;
+  background: rgba(200, 255, 255, .5);
+  border-radius: 50%;
+  box-shadow:inset 10px 10px 50px rgba(200, 255, 255, .6);
+  z-index: -1;
+}
+
+/* Bubble Effect
+   https://codepen.io/yunntan/pen/qsvCo */
+.background-bubble::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 7.5%;
+  left: 7.5%;
+  border-radius: 75% 25%;
+  box-shadow: inset 10px 10px 50px rgba(255,255,255,.6);
+}
+
+.background-bubble::after {
+   content: "";
+   display: block;
+   position: absolute;
+   width: 85%;
+   height: 85%;
+   border-radius: 100%;
+   left: 7.5%;
+   top: 7.5%;
+   box-shadow: inset 0px -10px 10px rgba(0,0,0,.05);
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.project-card {
+  text-align: center;
+  flex: 32%;
+  max-width: 32%;
+  margin: 1em 0.5%;
+  background: rgba(200, 255, 255, .5);
+  border: 10px solid black;
+  /* animation: explode 10s 1 ease-in forwards; */
+  box-shadow: 2px 5px #888888;
+}
+
+.project-image {
+  width: 100%;
+  outline: 1px solid #000;
+}
+
+.feature-image-container {
+
+}
+
+.links-container {
+  text-align: center;
+}
+
+.link-icon {
+  max-width: 35px;
+  margin: 0.5em 0.5em 0 0.5em;
+}
+
+.feature-title, .feature-description {
+  padding: 0.5em 1em;
+}
+
+.feature-description {
+  font-size: 16px;
+}
+
+#header {
+  background: #000;
+  padding: 0.5em 0;
+}
+
+#logo-container {
+  flex: 7%;
+  margin-left: 3%;
+}
+
+#logo-container img {
+  width: 100%;
+}
+
+#logo:hover {
+  cursor: pointer;
+}
+
+#main-nav {
+  flex: 90%;
+  margin: auto 0 0 0;
+  text-align: right;
+}
+
+#main-nav ul {
+  margin: 0;
+}
+
+#main-nav li {
+  display: inline-block;
+  margin-right: 2em;
+}
+
+#main-nav a {
+  color: #FFF;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: normal;
+}
+
+#main-nav a:hover {
+  font-weight: bold;
+}
+
+#page-background {
+  position: fixed;
+  background: #18a999;
+  top: 0px;
+  z-index: -1;
+}
+
+#site-name, #subheading {
+  text-align: center;
+  font-size: 90px;
+  font-weight: bold;
+  -webkit-text-stroke: 4px white;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateY(-40%) translateX(-50%);
+}
+
+#subheading {
+  font-size: 30px;
+  -webkit-text-stroke: 1px white;
+  top: 50%;
+}
+
+@keyframes lift {
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+  }
+}
+
+@keyframes explode {
+  100% {
+    border: 10px solid black;
+  }
+}
