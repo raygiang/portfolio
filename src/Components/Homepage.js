@@ -14,10 +14,6 @@ class Homepage extends Component {
   }
 
   componentDidMount = () => {
-    const background = document.getElementById("page-background");
-    background.style.height = window.innerHeight + 'px';
-    background.style.width = window.innerWidth + 'px';
-
     let bubbleList = [];
 
     for(let i=0; i<100; i++) {
@@ -43,7 +39,7 @@ class Homepage extends Component {
   render() {
     return (
       <div>
-        <div id="page-background">
+        <div>
           { this.state.bubbleList }
         </div>
         <div className="page-wrapper">

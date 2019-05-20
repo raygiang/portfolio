@@ -1,4 +1,22 @@
-.background-bubble::after, #loading-bubble::after, .background-bubble::before, #loading-bubble::before {
+// variables
+$font-family-main: 'Raleway', sans-serif;
+$font-family-splash: 'Fredoka One', cursive;
+
+$background-gradient: linear-gradient(#17B9E8, #034978);
+$font-gradient: linear-gradient(#FFFFA2, #F1C94E);
+
+$bubble-colour-main: rgba(200, 255, 255, .3);
+$bubble-colour-secondary: rgba(200, 255, 255, .6);
+$bubble-colour-background: rgba(0,0,0,.05);
+
+// mix-ins
+@mixin card-flex($size) {
+  flex: $size;
+  max-width: $size;
+}
+
+// placholders
+%bubble-effect {
   content: "";
   display: block;
   position: absolute;
@@ -6,18 +24,18 @@
   left: 7.5%;
 }
 
-#page-background {
+%gradient-background {
   position: fixed;
   top: 0px;
   z-index: -1;
   height: 100vh;
-  background-image: linear-gradient(#17B9E8, #034978);
+  background-image: $background-gradient;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-#background-canvas, .card-overlay {
+%overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -25,6 +43,7 @@
   height: 100%;
 }
 
+// css
 html {
   box-sizing: border-box;
   font-size: 18px;
@@ -35,7 +54,7 @@ html {
 }
 
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: $font-family-main;
 }
 
 .page-wrapper {
@@ -45,26 +64,28 @@ body {
 
 .background-bubble, #loading-bubble {
   position: fixed;
-  background: rgba(200, 255, 255, 0.3);
+  background: $bubble-colour-main;
   border-radius: 50%;
-  box-shadow: inset 10px 10px 50px rgba(200, 255, 255, 0.6);
+  box-shadow:inset 10px 10px 50px $bubble-colour-secondary;
   z-index: -1;
 }
 
 /* Bubble Effect
    https://codepen.io/yunntan/pen/qsvCo */
 .background-bubble::before, #loading-bubble::before {
+  @extend %bubble-effect;
   width: 50%;
   height: 50%;
   border-radius: 75% 25%;
-  box-shadow: inset 10px 10px 50px rgba(200, 255, 255, 0.6);
+  box-shadow: inset 10px 10px 50px $bubble-colour-secondary;
 }
 
 .background-bubble::after, #loading-bubble::after {
+  @extend %bubble-effect;
   width: 85%;
   height: 85%;
   border-radius: 100%;
-  box-shadow: inset 0px -10px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0px -10px 10px $bubble-colour-background;
 }
 
 .flex-container {
@@ -74,17 +95,17 @@ body {
 
 .project-card {
   text-align: center;
-  flex: 32%;
-  max-width: 32%;
+  @include card-flex(32%);
   margin: 1em 0.5%;
   background: #FFF;
   border: 10px solid black;
   position: relative;
   border-radius: 50%;
-  overflow: hidden;
+  overflow:hidden;
 }
 
 .card-overlay {
+  @extend %overlay;
   background: rgba(255, 255, 255, 0.5);
 }
 
@@ -111,6 +132,7 @@ body {
 }
 
 #background-canvas {
+ @extend %overlay;
   z-index: -1;
 }
 
@@ -133,13 +155,15 @@ body {
   overflow: hidden;
 }
 
+// Gradient text reference: https://css-tricks.com/snippets/css/gradient-text/
 .loading-letters {
-  font-family: "Fredoka One", cursive;
+  font-family: $font-family-splash;
   display: inline-block;
   font-size: 68px;
-  background: linear-gradient(#FFFFA2, #F1C94E);
+  background: $font-gradient;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  // -webkit-text-stroke: 3px #000;
 }
 
 .link-icon {
@@ -192,6 +216,10 @@ body {
   color: yellow;
 }
 
+#page-background {
+  @extend %gradient-background;
+}
+
 #site-name, #subheading {
   text-align: center;
   font-size: 90px;
@@ -202,7 +230,7 @@ body {
   left: 50%;
   transform: translateY(-40%) translateX(-50%);
   white-space: nowrap;
-  font-family: "Fredoka One", cursive;
+  font-family: $font-family-splash;
 }
 
 #subheading {
@@ -216,6 +244,7 @@ body {
     transform: translateY(-100vh) rotate(360deg);
   }
 }
+
 @keyframes appear {
   0% {
     transform: scale(0);
@@ -224,6 +253,7 @@ body {
     transform: scale(1);
   }
 }
+
 @keyframes expand {
   0%, 100% {
     transform: scale(1);
@@ -232,25 +262,28 @@ body {
     transform: scale(1.5);
   }
 }
+
 @keyframes moveAccross {
   0% {
     transform: translateX(0px) rotate(0deg);
   }
+
   100% {
     transform: translateX(300px) rotate(480deg);
   }
 }
-@media all and (max-width: 900px) {
+
+@media all and (max-width:900px) {
   .project-card {
-    flex: 49%;
-    max-width: 49%;
+    @include card-flex(49%);
   }
 
   .project-modal {
     width: 75%;
   }
 }
-@media all and (max-width: 768px) {
+
+@media all and (max-width:768px) {
   #site-name {
     -webkit-text-stroke: 2px white;
     font-size: 55px;
@@ -265,7 +298,8 @@ body {
     width: 100%;
   }
 }
-@media all and (max-width: 480px) {
+
+@media all and (max-width:480px) {
   #site-name {
     -webkit-text-stroke: 1px white;
     font-size: 45px;
@@ -277,11 +311,11 @@ body {
   }
 
   .project-card {
-    flex: 99%;
-    max-width: 99%;
+    @include card-flex(99%);
   }
 }
-@media all and (max-width: 368px) {
+
+@media all and (max-width:368px) {
   #site-name {
     font-size: 30px;
   }
@@ -290,5 +324,3 @@ body {
     font-size: 16px;
   }
 }
-
-/*# sourceMappingURL=App.css.map */
