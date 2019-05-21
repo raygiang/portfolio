@@ -52,8 +52,8 @@ class BackgroundCanvas extends Component {
     let context = canvas.getContext('2d');
     let boundingRect = canvas.getBoundingClientRect();
 
-    this.lastMouseX = e ? e.clientX - boundingRect.left : window.outerWidth / 2;
-    this.lastMouseY = e ? e.clientY - boundingRect.top : window.outerHeight / 2;
+    this.lastMouseX = e ? e.clientX - boundingRect.left : this.lastMouseX;
+    this.lastMouseY = e ? e.clientY - boundingRect.top : this.lastMouseY;
 
     let canvasWidth = boundingRect.right - boundingRect.left;
     let canvasHeight = boundingRect.bottom - boundingRect.top;
