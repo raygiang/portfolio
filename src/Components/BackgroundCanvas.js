@@ -4,16 +4,47 @@ class BackgroundCanvas extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      animWidth: 0,
+      fishPos: 0,
     }
+    this.animationInterval = null;
+    this.animationWidth = null;
+    this.currWidth = null;
+    this.fishWidth = 0;
+    this.lastMouseX = 0;
+    this.lastMouseY = 0;
   }
 
   componentDidMount = () => {
     window.addEventListener("mousemove", this.updateFish);
+    
     this.updateFish();
+
+    this.animationInterval = setInterval(() => {
+      this.currWidth = (this.currWidth + 0.5) % this.animationWidth;
+
+      if(this.currWidth > this.animationWidth / 2) {
+        this.setState({
+          animWidth: (this.animationWidth / 2) - this.currWidth % (this.animationWidth / 2),
+          fishPos: (this.state.fishPos + 1) % window.innerWidth,
+        });
+      }
+      else {
+        this.setState({
+          animWidth: this.currWidth,
+          fishPos: (this.state.fishPos + 1) % window.innerWidth,
+        });
+      }
+    }, 10);
   };
 
   componentWillUnmount = () => {
     window.removeEventListener("mousemove", this.updateFish);
+    clearInterval(this.animationInterval);
+  };
+
+  componentDidUpdate = () => {
+    this.updateFish();
   };
 
   updateFish = (e) => {
@@ -21,8 +52,8 @@ class BackgroundCanvas extends Component {
     let context = canvas.getContext('2d');
     let boundingRect = canvas.getBoundingClientRect();
 
-    let xPos = e ? e.clientX - boundingRect.left : window.outerWidth / 2;
-    let yPos = e ? e.clientY - boundingRect.top : window.outerHeight / 2;
+    this.lastMouseX = e ? e.clientX - boundingRect.left : window.outerWidth / 2;
+    this.lastMouseY = e ? e.clientY - boundingRect.top : window.outerHeight / 2;
 
     let canvasWidth = boundingRect.right - boundingRect.left;
     let canvasHeight = boundingRect.bottom - boundingRect.top;
@@ -30,21 +61,21 @@ class BackgroundCanvas extends Component {
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
 
-    context.clearRect(0, 0, canvasWidth, canvasHeight);
-
-    this.drawFish(canvasWidth, canvasHeight, xPos, yPos);
+    this.drawFish(canvasWidth, canvasHeight, this.lastMouseX, this.lastMouseY);
   };
 
-  drawFish = (cWidth, cHeight, xPos, yPos) => {
+  drawFish = (cWidth, cHeight) => {
     let canvas = document.querySelector('#background-canvas');
     let context = canvas.getContext('2d');
 
-    let startX = cWidth / 15;
     let startY = cHeight * 0.75;
 
     let fishHeight = cHeight / 6;
     let fishWidth = cWidth / 8;
 
+    this.fishWidth = fishWidth;
+    this.animationWidth = fishWidth / 10;
+    
     if(fishWidth < fishHeight) {
       fishWidth = fishHeight;
     }
@@ -56,53 +87,57 @@ class BackgroundCanvas extends Component {
     context.fillStyle = fishGradient;
 
     // Fish Tail
-    context.moveTo(startX + (fishWidth / 4), startY + (fishHeight / 2));
-    context.lineTo(startX - (fishWidth / 6), startY);
-    context.lineTo(startX - (fishWidth / 4), startY + 10);
-    context.lineTo(startX - (fishWidth / 4), startY + fishHeight - 10);
-    context.lineTo(startX - (fishWidth / 6), startY + fishHeight);
-    context.lineTo(startX + (fishWidth / 4), startY + (fishHeight / 2));
+    context.moveTo(this.state.fishPos + (fishWidth / 4), startY + (fishHeight / 2));
+    context.lineTo(this.state.fishPos - (fishWidth / 6) + this.state.animWidth, startY);
+    context.lineTo(this.state.fishPos - (fishWidth / 4) + this.state.animWidth, startY + 10);
+    context.lineTo(this.state.fishPos - (fishWidth / 4) + this.state.animWidth, startY + fishHeight - 10);
+    context.lineTo(this.state.fishPos - (fishWidth / 6) + this.state.animWidth, startY + fishHeight);
+    context.lineTo(this.state.fishPos + (fishWidth / 4), startY + (fishHeight / 2));
     context.fill();
 
     // Upper Fin
-    context.moveTo(startX + (fishWidth * 0.75), startY);
-    context.lineTo(startX + (fishWidth * 0.5), startY - (fishHeight / 4));
-    context.lineTo(startX, startY - (fishHeight / 4));
-    context.lineTo(startX + (fishWidth * 0.25), startY);
+    context.moveTo(this.state.fishPos + (fishWidth * 0.75), startY);
+    context.lineTo(this.state.fishPos + (fishWidth * 0.5) + this.state.animWidth, startY - (fishHeight / 4));
+    context.lineTo(this.state.fishPos + this.state.animWidth, startY - (fishHeight / 4));
+    context.lineTo(this.state.fishPos + this.state.animWidth + (fishWidth * 0.25), startY);
     context.fill();
 
     // Lower Fin
-    context.moveTo(startX + (fishWidth * 0.75), startY + fishHeight); 
-    context.lineTo(startX + (fishWidth * 0.5), startY + fishHeight + (fishHeight / 8));
-    context.lineTo(startX, startY + fishHeight + (fishHeight / 8));
-    context.lineTo(startX + (fishWidth * 0.25), startY + fishHeight);
+    context.moveTo(this.state.fishPos + (fishWidth * 0.75), startY + fishHeight); 
+    context.lineTo(this.state.fishPos + (fishWidth * 0.5)  + this.state.animWidth, startY + fishHeight + (fishHeight / 8));
+    context.lineTo(this.state.fishPos + this.state.animWidth, startY + fishHeight + (fishHeight / 8));
+    context.lineTo(this.state.fishPos + this.state.animWidth + (fishWidth * 0.25), startY + fishHeight);
     context.fill();
 
     // Fish Body
-    context.fillRect(startX, startY, fishWidth, fishHeight);
+    context.fillRect(this.state.fishPos, startY, fishWidth, fishHeight);
 
     // Fish Mouth
-    context.fillStyle =  "#000";
+    context.fillStyle =  "#FF8080";
     context.beginPath();
-    context.moveTo(startX + fishWidth, startY + fishHeight * 0.75);
-    context.lineTo(startX + fishWidth * 0.8, startY + fishHeight * 0.75);
-    context.lineTo(startX + fishWidth * 0.65, startY + fishHeight * 0.65);
-    context.lineTo(startX + fishWidth * 0.8, startY + fishHeight * 0.80);
-    context.lineTo(startX + fishWidth, startY + fishHeight * 0.80);
+    // context.moveTo(this.state.fishPos + fishWidth, startY + fishHeight * 0.75);
+    // context.lineTo(this.state.fishPos + fishWidth * 0.8, startY + fishHeight * 0.75);
+    // context.lineTo(this.state.fishPos + fishWidth * 0.65, startY + fishHeight * 0.65);
+    // context.lineTo(this.state.fishPos + fishWidth * 0.8, startY + fishHeight * 0.80);
+    // context.lineTo(this.state.fishPos + fishWidth, startY + fishHeight * 0.80);
+    // context.stroke();
+    context.beginPath();
+    context.arc(this.state.fishPos + fishWidth * 0.92, startY + fishHeight * 0.7, fishWidth / 24, 0, 2 * Math.PI);
     context.fill();
 
     let eyeRadius = fishWidth * 0.1;
-    let eyeCenterX = startX + fishWidth * 0.8;
+    let eyeCenterX = this.state.fishPos + fishWidth * 0.8;
     let eyeCenterY = startY + fishHeight * 0.3;
 
-    let xOffset = (xPos - eyeCenterX) / cWidth;
-    let yOffset = (yPos - eyeCenterY) / cHeight;
+    let xOffset = (this.lastMouseX - eyeCenterX) / cWidth;
+    let yOffset = (this.lastMouseY - eyeCenterY) / cHeight;
 
     // Eyeball
     context.fillStyle =  "#FFF";
     context.beginPath();
     context.arc(eyeCenterX, eyeCenterY, eyeRadius, 0, 2 * Math.PI);
     context.fill();
+    // console.log(this.lastMouseX);
 
     // Pupil
     context.fillStyle =  "#000";
