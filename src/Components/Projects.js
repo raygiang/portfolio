@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ProjectCard from './ProjectCard';
-import BackgroundCanvas from './BackgroundCanvas';
 import Loading from './Loading';
 import Modal from 'react-responsive-modal';
 
@@ -90,7 +89,6 @@ class Projects extends Component {
             onClose={ this.onCloseModal }
             center
           >
-            <BackgroundCanvas />
             <h2 id="modal-title">{ this.state.projectName }</h2>
             <div className="links-container">
               <a href={ this.state.projectLink } target="_blank" rel="noopener noreferrer">
@@ -102,7 +100,7 @@ class Projects extends Component {
             </div>
             <div>{ this.state.projectTech.join(', ') }</div>
             <h3>Description</h3>
-            <div>{ this.state.projectDesc }</div>
+            <div dangerouslySetInnerHTML={{__html: this.state.projectDesc}}></div>
             <h3>Features</h3>
             <div>{ this.state.projectFeat }</div>
           </Modal>

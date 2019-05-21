@@ -93,6 +93,10 @@ body {
   flex-wrap: wrap;
 }
 
+#about-me {
+  // text-align: right;
+}
+
 .project-card {
   text-align: center;
   @include card-flex(32%);
@@ -100,8 +104,7 @@ body {
   background: #FFF;
   border: 10px solid black;
   position: relative;
-  border-radius: 50%;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .card-overlay {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Bubble from './Bubble';
 
 class Loading extends Component {
   constructor(props) {
