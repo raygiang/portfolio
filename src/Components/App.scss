@@ -193,8 +193,21 @@ body {
   cursor: pointer;
 }
 
+#my-name {
+  flex: 30%;
+  margin: auto;
+  font-size: 35px;
+  text-align: center;
+  font-family: $font-family-splash;
+}
+
+#my-name > a{
+  color: #FFF;
+  text-decoration: none;
+}
+
 #main-nav {
-  flex: 90%;
+  flex: 60%;
   margin: auto 0 0 0;
   text-align: right;
 }
@@ -278,7 +291,15 @@ body {
 
 @media all and (max-width:900px) {
   .project-card {
-    @include card-flex(49%);
+    @include card-flex(48%);
+  }
+
+  .project-card:nth-child(2n) {
+    margin: 1em 1.5% 1em 0.5%;
+  }
+
+  .project-card:nth-child(2n + 1) {
+    margin: 1em 0.5% 1em 1.5%;
   }
 
   .project-modal {
@@ -302,6 +323,13 @@ body {
   }
 }
 
+@media all and (max-width:600px) {
+  .project-card {
+    @include card-flex(96%);
+    margin: 1em 2% !important;
+  }
+}
+
 @media all and (max-width:480px) {
   #site-name {
     -webkit-text-stroke: 1px white;
@@ -311,10 +339,6 @@ body {
   #subheading {
     font-size: 18px;
     top: 45%;
-  }
-
-  .project-card {
-    @include card-flex(99%);
   }
 }
 

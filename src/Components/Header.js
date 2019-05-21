@@ -8,6 +8,7 @@ function Header() {
         <div id="logo-container">
           <Link to="/"><img id="logo" src="images/logo.png" alt="Logo" page="0" /></Link>
         </div>
+        <div id="my-name"><Link to="/">Raymond Giang</Link></div>
         <nav id="main-nav">
           <ul>
             <li>

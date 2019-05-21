@@ -165,8 +165,21 @@ body {
   cursor: pointer;
 }
 
+#my-name {
+  flex: 30%;
+  margin: auto;
+  font-size: 35px;
+  text-align: center;
+  font-family: "Fredoka One", cursive;
+}
+
+#my-name > a {
+  color: #FFF;
+  text-decoration: none;
+}
+
 #main-nav {
-  flex: 90%;
+  flex: 60%;
   margin: auto 0 0 0;
   text-align: right;
 }
@@ -241,8 +254,16 @@ body {
 }
 @media all and (max-width: 900px) {
   .project-card {
-    flex: 49%;
-    max-width: 49%;
+    flex: 48%;
+    max-width: 48%;
+  }
+
+  .project-card:nth-child(2n) {
+    margin: 1em 1.5% 1em 0.5%;
+  }
+
+  .project-card:nth-child(2n+1) {
+    margin: 1em 0.5% 1em 1.5%;
   }
 
   .project-modal {
@@ -264,6 +285,13 @@ body {
     width: 100%;
   }
 }
+@media all and (max-width: 600px) {
+  .project-card {
+    flex: 96%;
+    max-width: 96%;
+    margin: 1em 2% !important;
+  }
+}
 @media all and (max-width: 480px) {
   #site-name {
     -webkit-text-stroke: 1px white;
@@ -273,11 +301,6 @@ body {
   #subheading {
     font-size: 18px;
     top: 45%;
-  }
-
-  .project-card {
-    flex: 99%;
-    max-width: 99%;
   }
 }
 @media all and (max-width: 368px) {

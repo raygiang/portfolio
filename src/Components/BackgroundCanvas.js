@@ -8,20 +8,21 @@ class BackgroundCanvas extends Component {
   }
 
   componentDidMount = () => {
-    window.addEventListener("mousemove", this.makeSparks);
+    window.addEventListener("mousemove", this.updateFish);
+    this.updateFish();
   };
 
   componentWillUnmount = () => {
-    window.removeEventListener("mousemove", this.makeSparks);
+    window.removeEventListener("mousemove", this.updateFish);
   };
 
-  makeSparks = (e) => {
+  updateFish = (e) => {
     let canvas = document.querySelector('#background-canvas');
     let context = canvas.getContext('2d');
     let boundingRect = canvas.getBoundingClientRect();
 
-    let xPos = e.clientX - boundingRect.left;
-    let yPos = e.clientY - boundingRect.top;
+    let xPos = e ? e.clientX - boundingRect.left : window.outerWidth / 2;
+    let yPos = e ? e.clientY - boundingRect.top : window.outerHeight / 2;
 
     let canvasWidth = boundingRect.right - boundingRect.left;
     let canvasHeight = boundingRect.bottom - boundingRect.top;
@@ -41,8 +42,12 @@ class BackgroundCanvas extends Component {
     let startX = cWidth / 15;
     let startY = cHeight * 0.75;
 
-    let fishWidth = cWidth / 8;
     let fishHeight = cHeight / 6;
+    let fishWidth = cWidth / 8;
+
+    if(fishWidth < fishHeight) {
+      fishWidth = fishHeight;
+    }
 
     var fishGradient = context.createLinearGradient(0, 0, fishWidth, 0);
     fishGradient.addColorStop(0, "#FFA142");
@@ -76,14 +81,22 @@ class BackgroundCanvas extends Component {
     // Fish Body
     context.fillRect(startX, startY, fishWidth, fishHeight);
 
-    let eyeRadius = fishHeight * 0.1;
+    // Fish Mouth
+    context.fillStyle =  "#000";
+    context.beginPath();
+    context.moveTo(startX + fishWidth, startY + fishHeight * 0.75);
+    context.lineTo(startX + fishWidth * 0.8, startY + fishHeight * 0.75);
+    context.lineTo(startX + fishWidth * 0.65, startY + fishHeight * 0.65);
+    context.lineTo(startX + fishWidth * 0.8, startY + fishHeight * 0.80);
+    context.lineTo(startX + fishWidth, startY + fishHeight * 0.80);
+    context.fill();
+
+    let eyeRadius = fishWidth * 0.1;
     let eyeCenterX = startX + fishWidth * 0.8;
     let eyeCenterY = startY + fishHeight * 0.3;
 
     let xOffset = (xPos - eyeCenterX) / cWidth;
     let yOffset = (yPos - eyeCenterY) / cHeight;
-
-    // console.log(xOffset, yOffset);
 
     // Eyeball
     context.fillStyle =  "#FFF";
