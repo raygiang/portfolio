@@ -16,8 +16,8 @@ class Bubble extends Component {
 
   componentDidMount = () => {
     this.diameter = Math.random() * (75 - 20) + 20; // Random diameter from 20px-50px
-    this.startX = Math.random() * window.innerWidth; // Random x location
-    this.startY = Math.random() * window.innerHeight; // Random y location
+    this.startX = this.props.bubbleX ? this.props.bubbleX : Math.random() * window.innerWidth; // Random x location
+    this.startY = this.props.bubbleY ? this.props.bubbleY : Math.random() * window.innerHeight; // Random y location
     this.riseRate = Math.random() * (60 - 10) + 10; // Random rise rate
 
     let riseCounter = 1;

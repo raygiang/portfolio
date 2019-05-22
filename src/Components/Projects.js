@@ -92,10 +92,10 @@ class Projects extends Component {
             <h2 id="modal-title">{ this.state.projectName }</h2>
             <div className="links-container">
               <a href={ this.state.projectLink } target="_blank" rel="noopener noreferrer">
-                <img className="link-icon" src="images/icons/iconfinder_Internet_Line-02_1587499.svg" alt="project link icon" />
+                <i className="fas fa-globe-americas link-icon" />
               </a>
               <a href={ this.state.projectGithub } target="_blank" rel="noopener noreferrer">
-                <img className="link-icon" src="images/icons/iconfinder_mark-github_298822.svg" alt="github link icon" />
+                <i className="fab fa-github link-icon" />
               </a>
             </div>
             <div>{ this.state.projectTech.join(', ') }</div>

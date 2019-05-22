@@ -6,17 +6,6 @@
   left: 7.5%;
 }
 
-#page-background {
-  position: fixed;
-  top: 0px;
-  z-index: -1;
-  height: 100vh;
-  background-image: linear-gradient(#17B9E8, #034978);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 #background-canvas, .card-overlay {
   position: absolute;
   top: 0;
@@ -28,6 +17,7 @@
 html {
   box-sizing: border-box;
   font-size: 18px;
+  height: 100%;
 }
 
 *, *::before, *::after {
@@ -35,7 +25,10 @@ html {
 }
 
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: "Rubik", sans-serif;
+  height: 100%;
+  background: linear-gradient(#17B9E8, #034978) no-repeat center center fixed;
+  background-size: cover;
 }
 
 .page-wrapper {
@@ -48,7 +41,11 @@ body {
   background: rgba(200, 255, 255, 0.3);
   border-radius: 50%;
   box-shadow: inset 10px 10px 50px rgba(200, 255, 255, 0.6);
-  z-index: -1;
+}
+
+.hidden {
+  position: absolute;
+  left: -100000px;
 }
 
 /* Bubble Effect
@@ -78,9 +75,15 @@ body {
   max-width: 32%;
   margin: 1em 0.5%;
   background: #FFF;
-  border: 10px solid black;
   position: relative;
   overflow: hidden;
+  border: 5px solid #555;
+  border-bottom-color: #222;
+  border-top-color: #777;
+}
+
+.project-card:active {
+  animation: pressDown 0.5s 1 forwards;
 }
 
 .card-overlay {
@@ -142,13 +145,16 @@ body {
 }
 
 .link-icon {
-  max-width: 35px;
-  margin: 0.5em;
+  margin: 0.25em;
+  font-size: 30px;
+  color: #000;
 }
 
 #header {
   background: #000;
   padding: 0.5em 0;
+  position: relative;
+  z-index: 2;
 }
 
 #logo-container {
@@ -193,22 +199,43 @@ body {
   margin-right: 2em;
 }
 
-#main-nav a {
+#main-nav a, #footer a {
   color: #FFF;
   text-transform: uppercase;
   text-decoration: none;
   font-weight: normal;
 }
 
-#main-nav a:hover {
+#main-nav a:hover, #footer a:hover {
   color: yellow;
+}
+
+#hamburger-area {
+  flex: 10%;
+  text-align: right;
+  display: none;
+  margin-right: 10px;
+}
+
+#hamburger-area > button {
+  background: none;
+  border: none;
+}
+
+#hamburger-menu {
+  color: #FFF;
+  font-size: 30px;
+}
+
+#hamburger-menu:hover {
+  cursor: pointer;
 }
 
 #site-name, #subheading {
   text-align: center;
   font-size: 90px;
   font-weight: bold;
-  -webkit-text-stroke: 3px white;
+  -webkit-text-stroke: 2px white;
   position: absolute;
   top: 40%;
   left: 50%;
@@ -221,6 +248,48 @@ body {
   font-size: 30px;
   -webkit-text-stroke: 1px white;
   top: 50%;
+}
+
+#content {
+  margin-bottom: 2em;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #000;
+  color: #FFF;
+  font-size: 16px;
+}
+
+#footer a {
+  text-transform: none;
+}
+
+#github-link {
+  flex: 9%;
+  margin-left: 1%;
+  font-size: 25px;
+}
+
+#github-icon {
+  margin-top: 8px;
+}
+
+#contact-area, #copyright {
+  flex: 44%;
+  padding: 0.5em 0;
+  margin: auto 0;
+}
+
+#contact-area {
+  margin-left: 1%;
+}
+
+#copyright {
+  text-align: right;
+  margin-right: 1%;
 }
 
 @keyframes lift {
@@ -252,7 +321,19 @@ body {
     transform: translateX(300px) rotate(480deg);
   }
 }
+@keyframes pressDown {
+  0% {
+    border: 5px solid #555;
+  }
+  100% {
+    border: 4px solid #555;
+  }
+}
 @media all and (max-width: 900px) {
+  #logo-container {
+    display: none;
+  }
+
   .project-card {
     flex: 48%;
     max-width: 48%;
@@ -271,6 +352,10 @@ body {
   }
 }
 @media all and (max-width: 768px) {
+  #my-name {
+    font-size: 30px;
+  }
+
   #site-name {
     -webkit-text-stroke: 2px white;
     font-size: 55px;
@@ -285,11 +370,47 @@ body {
     width: 100%;
   }
 }
+@media all and (max-width: 680px) {
+  #my-name {
+    font-size: 25px;
+    margin-left: 5px;
+  }
+
+  #main-nav {
+    font-size: 16px;
+  }
+}
 @media all and (max-width: 600px) {
   .project-card {
     flex: 96%;
     max-width: 96%;
     margin: 1em 2% !important;
+  }
+}
+@media all and (max-width: 570px) {
+  #my-name {
+    text-align: left;
+    flex: 2 0 0;
+  }
+
+  #main-nav {
+    display: none;
+    flex: 100%;
+  }
+
+  #hamburger-area {
+    display: block;
+    flex: 1 0 0;
+  }
+
+  #main-nav.show-menu, #main-nav li {
+    display: block;
+  }
+
+  #main-nav li {
+    margin-top: 0.5em;
+    margin-right: 20px;
+    font-size: 20px;
   }
 }
 @media all and (max-width: 480px) {
@@ -301,6 +422,22 @@ body {
   #subheading {
     font-size: 18px;
     top: 45%;
+  }
+
+  #github-link {
+    flex: 19%;
+  }
+
+  #contact-area {
+    flex: 79%;
+  }
+
+  #github-link, #contact-area, #copyright {
+    text-align: center;
+  }
+
+  #copyright {
+    flex: 100%;
   }
 }
 @media all and (max-width: 368px) {

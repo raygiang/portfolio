@@ -7,7 +7,7 @@ class Contact extends Component {
 
   render() {
     return (
-      <div className="page-background">
+      <div>
         <div className="page-wrapper">
           <div>(Don't) Contact Me</div>
         </div>

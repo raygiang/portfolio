@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import BackgroundCanvas from './BackgroundCanvas';
 
 class About extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
-      <div className="page-background">
+      <div>
         <BackgroundCanvas />
         <div className="page-wrapper">
           <div id="about-me">

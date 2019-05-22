@@ -5,30 +5,34 @@ import Header from './Header';
 import Homepage from './Homepage';
 import About from './About';
 import Projects from './Projects';
-import Contact from './Contact';
+import Footer from './Footer';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+  
+  // updateBackgroundSize = () => {
+  //   const background = document.querySelector("#page-background");
+  //   background.style.height = window.innerHeight + 'px';
+  //   background.style.width = window.innerWidth + 'px';
+  // };
 
-  componentDidMount = () => {
-    const background = document.querySelector("#page-background");
-    background.style.height = window.innerHeight + 'px';
-    background.style.width = window.innerWidth + 'px';
-  }
+  // componentDidMount = () => {
+  //   this.updateBackgroundSize();
+  //   window.onresize = this.updateBackgroundSize;
+  //   window.addEventListener('orientationchange', this.updateBackgroundSize);
+  // };
 
   render() {
     return (
       <Router>
-        <div id="page-background"></div>
-
         <Header />
 
-        <Route path="/" exact component={Homepage} />
-        <Route path="/About" component={About} />
-        <Route path="/Projects" component={Projects} />
-        <Route path="/Contact" component={Contact} />
+        <div id="content">
+          <Route path="/" exact component={Homepage} />
+          <Route path="/About" component={About} />
+          <Route path="/Projects" component={Projects} />
+        </div>
+
+        <Footer />
       </Router>
     );
   }
