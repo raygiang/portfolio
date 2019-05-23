@@ -45,6 +45,14 @@ class Homepage extends Component {
         <div className="page-wrapper">
           <div id="site-name">Raymond Giang</div>
           <p id="subheading">Full Stack Web Developer</p>
+          <a title="My Github" href="https://www.github.com/raygiang8" id="github-link" target="_blank" rel="noopener noreferrer">
+            <i id="github-icon" className="fab fa-github button-icon"></i>
+            Find me on Github
+          </a>
+          <a title="Email Me!" href="mailto:raymondgiang@gmail.com" id="mail-link">
+            <i id="mail-icon" className="far fa-envelope button-icon"></i>
+            raymondgiang@gmail.com
+          </a>          
         </div>
       </div>
     );

@@ -33,7 +33,7 @@ class ProjectCard extends Component {
 
   render() {
     return (
-      <div className="project-card" onClick={ this.openModal } onMouseEnter={ this.addOverlay } onMouseLeave={ this.removeOverlay }>
+      <div title={ this.props.name } className="project-card" tabIndex="0" onClick={ this.openModal } onMouseEnter={ this.addOverlay } onMouseLeave={ this.removeOverlay }>
         <div className="card-overlay" style={ this.state.addedStyles } ></div>
         <div className="feature-image-container">
           <img className="project-image" src={ this.props.featureImage } alt="project screenshot" />

@@ -24,7 +24,7 @@ $bubble-colour-background: rgba(0,0,0,.05);
   left: 7.5%;
 }
 
-%gradient-background {
+// %gradient-background {
   // position: fixed;
   // top: 0px;
   // z-index: -1;
@@ -33,7 +33,7 @@ $bubble-colour-background: rgba(0,0,0,.05);
   // background-position: center;
   // background-repeat: no-repeat;
   // background-size: cover;
-}
+// }
 
 %overlay {
   position: absolute;
@@ -66,16 +66,16 @@ body {
   margin: 0 auto;
 }
 
+.hidden {
+  position: absolute;
+  left: -100000px;
+}
+
 .background-bubble, #loading-bubble {
   position: fixed;
   background: $bubble-colour-main;
   border-radius: 50%;
   box-shadow:inset 10px 10px 50px $bubble-colour-secondary;
-}
-
-.hidden {
-  position: absolute;
-  left: -100000px;
 }
 
 /* Bubble Effect
@@ -88,21 +88,9 @@ body {
   box-shadow: inset 10px 10px 50px $bubble-colour-secondary;
 }
 
-.background-bubble::after, #loading-bubble::after {
-  @extend %bubble-effect;
-  width: 85%;
-  height: 85%;
-  border-radius: 100%;
-  box-shadow: inset 0px -10px 10px $bubble-colour-background;
-}
-
-.flex-container {
+.flex-container, #skills-area, #front-end-box, #back-end-box {
   display: flex;
   flex-wrap: wrap;
-}
-
-#about-me {
-  // text-align: right;
 }
 
 .project-card {
@@ -112,9 +100,10 @@ body {
   background: #FFF;
   position: relative;
   overflow: hidden;
-  border: 5px solid #555;
-  border-bottom-color: #222;
-  border-top-color: #777;
+  // border: 5px solid #555;
+  // border-bottom-color: #222;
+  // border-top-color: #777;
+  box-shadow: 0 0 15px rgba(0,0,0,0.75);
 }
 
 .project-card:active {
@@ -139,13 +128,51 @@ body {
   font-size: 16px;
 }
 
-.project-card:hover, .close-button:hover {
-  cursor: pointer;
+// ABOUT
+
+#about-me {
+  background: rgb(255, 255, 255, 0.5);
+  padding: 1em;
+  margin: 1em;
+  border-radius: 10px;
 }
 
-.project-modal {
-  width: 50%;
-  animation: appear 0.5s 1 forwards;
+#about-me > h2 {
+  margin: 0 0 0.5em 0;
+}
+
+#front-end-box {
+  flex: 31%;
+  margin: 0 1%;
+}
+
+#back-end-box {
+  flex: 64%;
+  margin: 0 1%;
+}
+
+.skills-heading {
+  flex: 100% 0 0;
+  margin: 0 0 0.5em 0;
+  font-size: 20px;
+}
+
+.skills-section {
+  flex: 50%;
+}
+
+.skills-section h5 {
+  margin: 0 0 0.5em 0;
+  font-size: 18px;
+}
+
+.skills-section ul {
+  padding: 0;
+  margin: 0;
+}
+
+.skills-section li {
+  list-style: none;
 }
 
 #background-canvas {
@@ -153,8 +180,10 @@ body {
   z-index: -1;
 }
 
-#modal-title {
-  margin-bottom: 0;
+// PROJECTS
+
+.project-card:hover, .close-button:hover {
+  cursor: pointer;
 }
 
 #loading {
@@ -170,6 +199,17 @@ body {
   width: 100%;
   height: 50px;
   overflow: hidden;
+}
+
+// PROJECT MODAL
+
+.project-modal {
+  width: 50%;
+  animation: appear 0.5s 1 forwards;
+}
+
+#modal-title {
+  margin-bottom: 0;
 }
 
 // Gradient text reference: https://css-tricks.com/snippets/css/gradient-text/
@@ -188,6 +228,8 @@ body {
   font-size: 30px;
   color: #000;
 }
+
+// HEADER
 
 #header {
   background: #000;
@@ -270,13 +312,15 @@ body {
   cursor: pointer;
 }
 
-#site-name, #subheading {
+// HOMEPAGE
+
+#site-name, #subheading, #github-link, #mail-link {
   text-align: center;
   font-size: 90px;
   font-weight: bold;
   -webkit-text-stroke: 2px white;
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 50%;
   transform: translateY(-40%) translateX(-50%);
   white-space: nowrap;
@@ -286,12 +330,42 @@ body {
 #subheading {
   font-size: 30px;
   -webkit-text-stroke: 1px white;
-  top: 50%;
+  top: 45%;
+}
+
+#github-link, #mail-link {
+  font-family: $font-family-main;
+  font-size: 18px;
+  font-weight: normal;
+  -webkit-text-stroke: 0;
+  background: #000;
+  border-radius: 10px;
+  color: #FFF;
+  text-decoration: none;
+  padding: 0.5em 1em;
+}
+
+#github-link:hover, #mail-link:hover {
+  color: yellow;
+}
+
+#github-link {
+  top: 70%;
+}
+
+#mail-link {
+  top: 80%;
+}
+
+.button-icon{
+  margin-right: 10px;
 }
 
 #content {
-  margin-bottom: 2em;
+  margin-bottom: 2.5em;
 }
+
+// FOOTER
 
 #footer {
   position: fixed;
@@ -300,36 +374,48 @@ body {
   background: #000;
   color: #FFF;
   font-size: 16px;
-}
-
-#footer a {
-  text-transform: none;
-}
-
-#github-link {
-  flex: 9%;
-  margin-left: 1%;
-  font-size: 25px;
-}
-
-#github-icon {
-  margin-top: 8px;
-}
-
-#contact-area, #copyright {
-  flex: 44%;
   padding: 0.5em 0;
-  margin: auto 0;
 }
 
-#contact-area {
-  margin-left: 1%;
+.footer-section {
+  flex: 48%;
+  margin: 0 1%;
 }
 
-#copyright {
+.footer-section a {
+  text-transform: none;
+  margin: 0 0.5em;
+  font-size: 20px;
+}
+
+.footer-section:last-child {
   text-align: right;
-  margin-right: 1%;
 }
+
+// #github-link {
+//   flex: 9%;
+//   margin-left: 1%;
+//   font-size: 25px;
+// }
+
+// #github-icon {
+//   margin-top: 8px;
+// }
+
+// #contact-area, #copyright {
+//   flex: 44%;
+//   padding: 0.5em 0;
+//   margin: auto 0;
+// }
+
+// #contact-area {
+//   margin-left: 1%;
+// }
+
+// #copyright {
+//   text-align: right;
+//   margin-right: 1%;
+// }
 
 @keyframes lift {
   100% {
@@ -367,10 +453,10 @@ body {
 
 @keyframes pressDown {
   0% {
-    border: 5px solid #555;
+    border: 3px solid #555;
   }
   100% {
-    border: 4px solid #555;
+    border: 2px solid #555;
   }
 }
 
@@ -459,6 +545,18 @@ body {
     margin-right: 20px;
     font-size: 20px;
   }
+
+  #front-end-box, #back-end-box {
+    flex: 100%;
+  }
+
+  #back-end-box {
+    margin-top: 1em;
+  }
+
+  #content {
+    padding-bottom: 2em;
+  }
 }
 
 @media all and (max-width:480px) {
@@ -472,20 +570,16 @@ body {
     top: 45%;
   }
 
-  #github-link {
-    flex: 19%;
-  }
-
-  #contact-area {
-    flex: 79%;
-  }
-
-  #github-link, #contact-area, #copyright {
-    text-align: center;
-  }
-
-  #copyright {
+  .skills-section {
     flex: 100%;
+  }
+
+  .skills-section {
+    margin-bottom: 1em;
+  }
+
+  #about-me {
+    padding-bottom: 0;
   }
 }
 

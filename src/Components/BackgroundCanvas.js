@@ -47,12 +47,13 @@ class BackgroundCanvas extends Component {
     }, 10);
 
     setInterval(() => {
+      // console.log(window.pageYOffset);
       if(this.bubbles.length < 1) {
         this.bubbles.push(
           <Bubble
             key={ this.bubbles.length }
             bubbleX={ this.state.fishPos + this.fishWidth }
-            bubbleY={ this.fishY + this.fishHeight * 0.52 }
+            bubbleY={ this.fishY - window.pageYOffset + this.fishHeight * 0.52 }
             bubblePop={ this.bubblePop }
           />
         );
@@ -137,12 +138,6 @@ class BackgroundCanvas extends Component {
     // Fish Mouth
     context.fillStyle =  "#FF8080";
     context.beginPath();
-    // context.moveTo(this.state.fishPos + fishWidth, this.fishY + fishHeight * 0.75);
-    // context.lineTo(this.state.fishPos + fishWidth * 0.8, this.fishY + fishHeight * 0.75);
-    // context.lineTo(this.state.fishPos + fishWidth * 0.65, this.fishY + fishHeight * 0.65);
-    // context.lineTo(this.state.fishPos + fishWidth * 0.8, this.fishY + fishHeight * 0.80);
-    // context.lineTo(this.state.fishPos + fishWidth, this.fishY + fishHeight * 0.80);
-    // context.stroke();
     context.beginPath();
     context.arc(this.state.fishPos + fishWidth * 0.92, this.fishY + fishHeight * 0.7, fishWidth / 24, 0, 2 * Math.PI);
     context.fill();
@@ -169,7 +164,7 @@ class BackgroundCanvas extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{height:'100%'}}>
         <canvas id="background-canvas">
         </canvas>
         {this.bubbles[0]}

@@ -69,8 +69,18 @@ class Projects extends Component {
       })
       .catch(err => console.log(err));
 
-      setTimeout(() => { this.setState({ animationDone: true }) }, 1500);
-  }
+    setTimeout(() => { this.setState({ animationDone: true }) }, 800);
+  };
+
+  componentDidUpdate = () => {
+    let projCards = document.querySelectorAll('.project-card');
+    for(let projCard of projCards) {
+      projCard.addEventListener('keypress', (e) => {
+        e.preventDefault();
+        if(e.keyCode === 13 || e.keyCode === 33) { projCard.click() };
+      });
+    }
+  };
 
   render() {
     return (
@@ -90,6 +100,7 @@ class Projects extends Component {
             center
           >
             <h2 id="modal-title">{ this.state.projectName }</h2>
+            <div id="modal-content">
             <div className="links-container">
               <a href={ this.state.projectLink } target="_blank" rel="noopener noreferrer">
                 <i className="fas fa-globe-americas link-icon" />
@@ -103,6 +114,7 @@ class Projects extends Component {
             <div dangerouslySetInnerHTML={{__html: this.state.projectDesc}}></div>
             <h3>Features</h3>
             <div>{ this.state.projectFeat }</div>
+            </div>
           </Modal>
         </div>
       </div>
