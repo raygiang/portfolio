@@ -13,6 +13,7 @@ class Loading extends Component {
     this.extraStyles = { animation: 'expand 0.5s 1 ease-in forwards' };
   }
 
+  // Get the loading letters corresponding to this animation frame
   loadLetters = () => {
     let newLetters = this.text.map((letter, index) => {
       if(index === this.state.animationFrame) {

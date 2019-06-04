@@ -20,6 +20,7 @@ class Projects extends Component {
     }
   }
 
+  // Get all projects from the database
   getProjects = async () => {
     const response = await fetch('/getProjects');
     const projects = await response.json();
@@ -29,6 +30,7 @@ class Projects extends Component {
     return projects;
   };
 
+  // When a project is selected open the modal
   onOpenModal = (name, desc, link, ghLink, tech, feat) => {
     this.setState({
       open: true,
@@ -41,6 +43,7 @@ class Projects extends Component {
     });
   };
  
+  // When the modal is closed
   onCloseModal = () => {
     this.setState({ open: false });
   };
@@ -48,6 +51,7 @@ class Projects extends Component {
   componentDidMount = () => {
     let projectsArray = [];
 
+    // Use the project information retrieved from the database to create ProjectCards
     this.getProjects()
       .then(response => {
         projectsArray = response.projects.map((project, index) =>
@@ -93,6 +97,7 @@ class Projects extends Component {
             <Loading />
           }
 
+        {/* The Modal that will contain the project information */}
           <Modal
             classNames={{modal: 'project-modal', closeButton: 'close-button'}}
             open={ this.state.open } 
@@ -102,10 +107,10 @@ class Projects extends Component {
             <h2 id="modal-title">{ this.state.projectName }</h2>
             <div id="modal-content">
             <div className="links-container">
-              <a href={ this.state.projectLink } target="_blank" rel="noopener noreferrer">
+              <a title="Live Link" href={ this.state.projectLink } target="_blank" rel="noopener noreferrer">
                 <i className="fas fa-globe-americas link-icon" />
               </a>
-              <a href={ this.state.projectGithub } target="_blank" rel="noopener noreferrer">
+              <a title="Github Link" href={ this.state.projectGithub } target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-github link-icon" />
               </a>
             </div>

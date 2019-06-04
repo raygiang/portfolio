@@ -9,7 +9,7 @@ class Contact extends Component {
     return (
       <div>
         <div className="page-wrapper">
-          <div>(Don't) Contact Me</div>
+          <div>Contact Me</div>
         </div>
       </div>
     );

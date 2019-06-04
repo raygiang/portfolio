@@ -8,19 +8,6 @@ import Projects from './Projects';
 import Footer from './Footer';
 
 class App extends Component {
-  
-  // updateBackgroundSize = () => {
-  //   const background = document.querySelector("#page-background");
-  //   background.style.height = window.innerHeight + 'px';
-  //   background.style.width = window.innerWidth + 'px';
-  // };
-
-  // componentDidMount = () => {
-  //   this.updateBackgroundSize();
-  //   window.onresize = this.updateBackgroundSize;
-  //   window.addEventListener('orientationchange', this.updateBackgroundSize);
-  // };
-
   render() {
     return (
       <Router>

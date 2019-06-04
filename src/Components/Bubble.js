@@ -35,6 +35,7 @@ class Bubble extends Component {
     });
   };
 
+  // Changes the bubble to red when hovered
   bubbleHovered = () => {
     let bubbleStyle = {
       width: this.diameter + 'px',

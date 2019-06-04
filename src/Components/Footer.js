@@ -7,9 +7,11 @@ function Footer() {
         <div className="footer-section">
           <a title="My Github" href="https://www.github.com/raygiang8" target="_blank" rel="noopener noreferrer">
             <i id="github-icon" className="fab fa-github"></i>
+            <div class="hidden">My GitHub Link</div>
           </a>
           <a title="Email Me!" href="mailto:raymondgiang@gmail.com">
             <i id="mail-icon" className="far fa-envelope"></i>
+            <div class="hidden">My Email Link</div>
           </a>      
         </div>
         <div className="footer-section">

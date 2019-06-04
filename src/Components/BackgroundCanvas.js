@@ -46,8 +46,8 @@ class BackgroundCanvas extends Component {
       }
     }, 10);
 
+    // Create one bubble every 1 second (if there is not bubble on the screen already)
     setInterval(() => {
-      // console.log(window.pageYOffset);
       if(this.bubbles.length < 1) {
         this.bubbles.push(
           <Bubble

@@ -24,17 +24,6 @@ $bubble-colour-background: rgba(0,0,0,.05);
   left: 7.5%;
 }
 
-// %gradient-background {
-  // position: fixed;
-  // top: 0px;
-  // z-index: -1;
-  // height: 100vh;
-  // background-image: $background-gradient;
-  // background-position: center;
-  // background-repeat: no-repeat;
-  // background-size: cover;
-// }
-
 %overlay {
   position: absolute;
   top: 0;
@@ -100,9 +89,6 @@ body {
   background: #FFF;
   position: relative;
   overflow: hidden;
-  // border: 5px solid #555;
-  // border-bottom-color: #222;
-  // border-top-color: #777;
   box-shadow: 0 0 15px rgba(0,0,0,0.75);
 }
 
@@ -212,6 +198,15 @@ body {
   margin-bottom: 0;
 }
 
+.project-modal a {
+  color: #000;
+  text-decoration: underline;
+}
+
+.project-modal a:hover {
+  color: blue;
+}
+
 // Gradient text reference: https://css-tricks.com/snippets/css/gradient-text/
 .loading-letters {
   font-family: $font-family-splash;
@@ -220,7 +215,6 @@ body {
   background: $font-gradient;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  // -webkit-text-stroke: 3px #000;
 }
 
 .link-icon {

@@ -36,7 +36,7 @@ class ProjectCard extends Component {
       <div title={ this.props.name } className="project-card" tabIndex="0" onClick={ this.openModal } onMouseEnter={ this.addOverlay } onMouseLeave={ this.removeOverlay }>
         <div className="card-overlay" style={ this.state.addedStyles } ></div>
         <div className="feature-image-container">
-          <img className="project-image" src={ this.props.featureImage } alt="project screenshot" />
+          <img className="project-image" src={ this.props.featureImage } alt={ "screenshot of " + this.props.name } />
         </div>
         <div className="info-area">
 

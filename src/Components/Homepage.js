@@ -13,6 +13,7 @@ class Homepage extends Component {
     this.context = null;
   }
 
+  // Create 100 bubbles
   componentDidMount = () => {
     let bubbleList = [];
 
@@ -25,6 +26,7 @@ class Homepage extends Component {
     });
   };
 
+  // Function that runs when a bubble is popped
   bubblePop = (index) => {
     let newBubbleList = this.state.bubbleList;
     newBubbleList[index] = "";
